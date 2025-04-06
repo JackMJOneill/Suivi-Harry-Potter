@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Suivi de Lecture - Harry Potter</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+    .livre {
+      font-size: 24px;
+      margin-top: 40px;
+      color: #2980b9;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 5px;
+    }
+    .progression {
+      font-weight: bold;
+      color: #27ae60;
+      margin-top: 10px;
+      white-space: pre-line;
+    }
+    input[type="checkbox"] {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+  <h1>Suivi de Lecture - Harry Potter</h1>
+
+  <script>
+    const livres = [
+      { titre: "Harry Potter à l'école des sorciers", chapitres: [
+        "Le survivant", "Une vitre disparaît", "Les lettres de nulle part", "Le gardien des clés",
+        "Le chemin de traverse", "Le départ pour Poudlard", "Le Choixpeau magique", "Le maître des potions",
+        "Le match de Quidditch", "Halloween", "Le Miroir du Riséd", "La pierre philosophale",
+        "Nicolas Flamel", "Norbert le dragon", "La Forêt interdite", "Sous la trappe", "L'homme aux deux visages"
+      ] },
+      { titre: "Harry Potter et la Chambre des secrets", chapitres: [
+        "Le pire anniversaire", "L'avertissement de Dobby", "Le Terrier", "Chez Fleury et Bott",
+        "La rentrée à Poudlard", "Gilderoy Lockhart", "Le Club de duel", "Le sang de bourbe",
+        "L'anniversaire de mort", "La Chambre des secrets", "Le Polynectar", "Le journal de Jedusor",
+        "Le très secret journal", "Cornelius Fudge", "Aragog", "La Chambre des secrets",
+        "L'héritier de Serpentard", "Dobby est libre"
+      ] },
+      { titre: "Harry Potter et le Prisonnier d'Azkaban", chapitres: [
+        "Le Magicobus", "La tante Marge se dégonfle", "Le Chaudron Baveur", "Le Détraqueur",
+        "Le Sinistros", "Talons et chaudrons", "Boggart !", "La fuite de la Grosse Dame",
+        "Grimoires et chapeaux pointus", "Le Maraudeur", "La Carte du Maraudeur",
+        "Le Patronus", "Gryffondor contre Serpentard", "Snape a la dent dure",
+        "Les Souvenirs de Rogue", "Pré-au-Lard", "Chats, rats et chiens",
+        "Moony, Wormtail, Padfoot and Prongs", "Le Secret de Remus Lupin",
+        "La Vérité éclate", "Le Baiser du Détraqueur", "Poste de fin d'année"
+      ] },
+      { titre: "Harry Potter et la Coupe de Feu", chapitres: [
+        "L'Os du père", "La cicatrice", "L'invitation", "Retour au Terrier", "Weasley et Weasley",
+        "La Coupe du Monde de Quidditch", "Bagman et Croupton", "La Marque des Ténèbres",
+        "Le manoir des Malfoy", "Le retour à Poudlard", "Le Chicaneur", "Le Tournoi des Trois Sorciers",
+        "Les quatre champions", "La Peseuse de baguettes", "Beauxbâtons et Durmstrang",
+        "Le Sortilège d’Attraction", "Les Épreuves commencent", "La Piste aux Dragons",
+        "Le Bal de Noël", "Sortilèges et secrets", "Le retour de Winky", "L'œuf et l'œil",
+        "La Salle sur Demande", "Le retour de Sirius", "La deuxième tâche",
+        "Rita Skeeter, journaliste fouineuse", "Le troisième indice", "Retour à la Pensine",
+        "Le Labyrinthe", "Le Seigneur des Ténèbres revient", "Veritaserum",
+        "Les Prioris Incantatem", "Le début de la fin", "Le départ de Poudlard"
+      ] },
+      { titre: "Harry Potter et l'Ordre du Phénix", chapitres: [
+        "Dudley détraqué", "Une bande de Détraqueurs", "La maison des Black", "Le square Grimmaurd",
+        "Le ministère de la Magie", "Dolores Ombrage", "Le procès", "La garde rapprochée",
+        "La prophétie cachée", "Les centaures", "La salle sur demande", "Les secrets de Rogue",
+        "L'armée de Dumbledore", "St Mungo", "Le serpent dans la nuit", "Les rêves de Harry",
+        "La trahison de Marietta", "L'attaque de Pré-au-Lard", "Le mystère du département",
+        "Les prophéties s'accomplissent", "Le sacrifice de Sirius", "La fuite de Voldemort",
+        "Retour à Privet Drive"
+      ] },
+      { titre: "Harry Potter et le Prince de sang-mêlé", chapitres: [
+        "Le Ministre et le Magicien", "Spinner's End", "Le serment inviolable", "Horace Slughorn",
+        "Le Choix de Drago", "Le Chemin de Traverse", "Le Poudlard Express", "Le Professeur Slughorn",
+        "Le Livre du Prince", "La bagarre à la salle sur demande", "Les souvenirs de Tom Jedusor",
+        "Noël au Terrier", "Les avertissements de Dumbledore", "Les Inferi dans la caverne",
+        "La promesse de Severus Snape", "La Tour d'astronomie", "La fuite des Mangemorts",
+        "Le testament de Dumbledore"
+      ] },
+      { titre: "Harry Potter et les Reliques de la Mort", chapitres: [
+        "Le départ", "Les sept Potter", "L'enterrement de Maugrey", "Les souvenirs de Scrimgeour",
+        "Le médaillon de Serpentard", "Le conte des trois frères", "La forêt de Dean",
+        "Godric's Hollow", "Le retour à Poudlard", "La bataille de Poudlard",
+        "Les Reliques de la Mort", "Le Prince de sang-mêlé", "L'enfant survivant"
+      ] }
+    ];
+
+    const lecteurs = ["Adar", "Clément", "David"];
+
+    function creerSuiviLecture() {
+      livres.forEach((livre, index) => {
+        const section = document.createElement('section');
+
+        const titre = document.createElement('h2');
+        titre.textContent = livre.titre;
+        titre.className = "livre";
+        section.appendChild(titre);
+
+        const table = document.createElement('table');
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+
+        headerRow.innerHTML = `<th>Chapitre</th>` + lecteurs.map(nom => `<th>${nom}</th>`).join('');
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        const tbody = document.createElement('tbody');
+        livre.chapitres.forEach((chapitre, i) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${chapitre}</td>` + lecteurs.map(nom => `<td><input type="checkbox" data-livre="${index}" data-lecteur="${nom}" onchange="mettreAJourPourcentage(${index}, '${nom}')"></td>`).join('');
+          tbody.appendChild(row);
+        });
+        table.appendChild(tbody);
+
+        const progression = document.createElement('p');
+        progression.className = 'progression';
+        progression.id = `progression-${index}`;
+        section.appendChild(table);
+        section.appendChild(progression);
+
+        document.body.appendChild(section);
+
+        lecteurs.forEach(nom => mettreAJourPourcentage(index, nom));
+      });
+    }
+
+    function mettreAJourPourcentage(indexLivre, nomLecteur) {
+      const checkboxes = document.querySelectorAll(`input[data-livre='${indexLivre}'][data-lecteur='${nomLecteur}']`);
+      const total = checkboxes.length;
+      const cochés = Array.from(checkboxes).filter(cb => cb.checked).length;
+      const pourcentage = Math.round((cochés / total) * 100);
+
+      const progression = document.getElementById(`progression-${indexLivre}`);
+      const ancienTexte = progression.textContent;
+      const lignes = ancienTexte.split('\n').filter(l => !l.startsWith(nomLecteur + ':'));
+      lignes.push(`${nomLecteur}: ${pourcentage}%`);
+      progression.textContent = lignes.join('\n');
+    }
+
+    creerSuiviLecture();
+  </script>
+</body>
+</html>
